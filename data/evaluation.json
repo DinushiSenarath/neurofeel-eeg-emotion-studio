@@ -1,0 +1,2571 @@
+{
+ "meta": {
+  "dataset": "FACED, 123 subjects, 32 channels, 28 video clips, 9 emotion classes",
+  "input": "Differential Entropy (DE) features released by FACED. Not raw EEG signals.",
+  "protocol": "Subject independent LOSO, 123 folds, 3444 trials",
+  "model": "CNN + Transformer with DANN (lambda 0.05) and center loss (weight 0.003), per subject standardisation",
+  "finalModel": "nb22 recipe, consolidated over seeds 42, 142 and 242 (nb25 runs)",
+  "source": "Computed by scripts/export_data.py from Dinushi's saved nb22/nb25 result, summary, confusion matrix and all_predictions CSV files. Ablation and paired test figures are from Final_Results_Table_2026-10-10_v2_final.md."
+ },
+ "headline": [
+  {
+   "metric": "Accuracy",
+   "mean": 58.03,
+   "sd": 0.6,
+   "perSeed": [
+    58.36,
+    58.39,
+    57.35
+   ],
+   "explanation": "Overall share of the 3444 trials predicted correctly."
+  },
+  {
+   "metric": "Macro F1",
+   "mean": 57.46,
+   "sd": 0.59,
+   "perSeed": [
+    57.74,
+    57.85,
+    56.78
+   ],
+   "explanation": "F1 averaged per subject in her thesis method, so each emotion counts equally and a weak class cannot hide behind a strong one."
+  },
+  {
+   "metric": "Balanced accuracy",
+   "mean": 58.64,
+   "sd": 0.6,
+   "perSeed": [
+    58.94,
+    59.04,
+    57.95
+   ],
+   "explanation": "Average recall across the 9 emotion classes, so it checks each emotion rather than each trial."
+  },
+  {
+   "metric": "Validation macro F1",
+   "mean": 58.52,
+   "sd": 0.25,
+   "perSeed": [
+    58.51,
+    58.27,
+    58.78
+   ],
+   "explanation": "Macro F1 on the validation subjects used during training and model selection. Only the mean compares across seeds, because the validation split changes with the seed."
+  }
+ ],
+ "perSeed": [
+  {
+   "seed": 42,
+   "accuracy": 58.36,
+   "macroF1": 57.74,
+   "balancedAccuracy": 58.94,
+   "valMacroF1": 58.51,
+   "subjects": 123
+  },
+  {
+   "seed": 142,
+   "accuracy": 58.39,
+   "macroF1": 57.85,
+   "balancedAccuracy": 59.04,
+   "valMacroF1": 58.27,
+   "subjects": 123
+  },
+  {
+   "seed": 242,
+   "accuracy": 57.35,
+   "macroF1": 56.78,
+   "balancedAccuracy": 57.95,
+   "valMacroF1": 58.78,
+   "subjects": 123
+  }
+ ],
+ "perClass": [
+  {
+   "class": "Amusement",
+   "accuracyMean": 78.32,
+   "accuracySd": 0.54,
+   "precision": 70.95,
+   "recall": 78.32,
+   "f1": 74.45,
+   "supportPerSeed": 369,
+   "note": "Recall here equals per class accuracy, both are the diagonal share of that class row in the confusion matrix."
+  },
+  {
+   "class": "Joy",
+   "accuracyMean": 67.66,
+   "accuracySd": 0.41,
+   "precision": 66.7,
+   "recall": 67.66,
+   "f1": 67.17,
+   "supportPerSeed": 369,
+   "note": "Recall here equals per class accuracy, both are the diagonal share of that class row in the confusion matrix."
+  },
+  {
+   "class": "Tenderness",
+   "accuracyMean": 65.31,
+   "accuracySd": 0.27,
+   "precision": 56.31,
+   "recall": 65.31,
+   "f1": 60.48,
+   "supportPerSeed": 369,
+   "note": "Recall here equals per class accuracy, both are the diagonal share of that class row in the confusion matrix."
+  },
+  {
+   "class": "Fear",
+   "accuracyMean": 63.05,
+   "accuracySd": 2.17,
+   "precision": 56.52,
+   "recall": 63.05,
+   "f1": 59.61,
+   "supportPerSeed": 369,
+   "note": "Recall here equals per class accuracy, both are the diagonal share of that class row in the confusion matrix."
+  },
+  {
+   "class": "Disgust",
+   "accuracyMean": 59.35,
+   "accuracySd": 1.36,
+   "precision": 58.35,
+   "recall": 59.35,
+   "f1": 58.84,
+   "supportPerSeed": 369,
+   "note": "Recall here equals per class accuracy, both are the diagonal share of that class row in the confusion matrix."
+  },
+  {
+   "class": "Anger",
+   "accuracyMean": 58.54,
+   "accuracySd": 1.78,
+   "precision": 54.45,
+   "recall": 58.54,
+   "f1": 56.42,
+   "supportPerSeed": 369,
+   "note": "Recall here equals per class accuracy, both are the diagonal share of that class row in the confusion matrix."
+  },
+  {
+   "class": "Sadness",
+   "accuracyMean": 47.15,
+   "accuracySd": 2.41,
+   "precision": 47.28,
+   "recall": 47.15,
+   "f1": 47.22,
+   "supportPerSeed": 369,
+   "note": "Recall here equals per class accuracy, both are the diagonal share of that class row in the confusion matrix."
+  },
+  {
+   "class": "Inspiration",
+   "accuracyMean": 46.79,
+   "accuracySd": 2.58,
+   "precision": 53.62,
+   "recall": 46.79,
+   "f1": 49.98,
+   "supportPerSeed": 369,
+   "note": "Recall here equals per class accuracy, both are the diagonal share of that class row in the confusion matrix."
+  },
+  {
+   "class": "Neutral",
+   "accuracyMean": 41.6,
+   "accuracySd": 1.12,
+   "precision": 56.75,
+   "recall": 41.6,
+   "f1": 48.01,
+   "supportPerSeed": 492,
+   "note": "Recall here equals per class accuracy, both are the diagonal share of that class row in the confusion matrix."
+  }
+ ],
+ "pooledReport": {
+  "macroPrecision": 57.88,
+  "macroRecall": 58.64,
+  "macroF1": 58.02,
+  "weightedF1": 57.66,
+  "pooledAccuracy": 58.03,
+  "note": "Pooled figures, computed from the three saved confusion matrices summed together (10332 predictions). These are not the same as the per subject macro F1 headline, and the app labels them separately."
+ },
+ "confusion": {
+  "labels": [
+   "Anger",
+   "Disgust",
+   "Fear",
+   "Sadness",
+   "Neutral",
+   "Amusement",
+   "Inspiration",
+   "Joy",
+   "Tenderness"
+  ],
+  "pooledCounts": [
+   [
+    648,
+    54,
+    53,
+    65,
+    77,
+    51,
+    76,
+    28,
+    55
+   ],
+   [
+    64,
+    657,
+    89,
+    51,
+    86,
+    39,
+    59,
+    32,
+    30
+   ],
+   [
+    54,
+    75,
+    698,
+    43,
+    39,
+    33,
+    43,
+    51,
+    71
+   ],
+   [
+    54,
+    54,
+    77,
+    522,
+    115,
+    45,
+    70,
+    63,
+    107
+   ],
+   [
+    123,
+    125,
+    96,
+    196,
+    614,
+    34,
+    82,
+    113,
+    93
+   ],
+   [
+    33,
+    24,
+    39,
+    16,
+    10,
+    867,
+    30,
+    27,
+    61
+   ],
+   [
+    112,
+    73,
+    76,
+    90,
+    45,
+    59,
+    518,
+    31,
+    103
+   ],
+   [
+    44,
+    44,
+    54,
+    53,
+    49,
+    39,
+    34,
+    749,
+    41
+   ],
+   [
+    58,
+    20,
+    53,
+    68,
+    47,
+    55,
+    54,
+    29,
+    723
+   ]
+  ],
+  "rowNormalisedPct": [
+   [
+    58.54,
+    4.88,
+    4.79,
+    5.87,
+    6.96,
+    4.61,
+    6.87,
+    2.53,
+    4.97
+   ],
+   [
+    5.78,
+    59.35,
+    8.04,
+    4.61,
+    7.77,
+    3.52,
+    5.33,
+    2.89,
+    2.71
+   ],
+   [
+    4.88,
+    6.78,
+    63.05,
+    3.88,
+    3.52,
+    2.98,
+    3.88,
+    4.61,
+    6.41
+   ],
+   [
+    4.88,
+    4.88,
+    6.96,
+    47.15,
+    10.39,
+    4.07,
+    6.32,
+    5.69,
+    9.67
+   ],
+   [
+    8.33,
+    8.47,
+    6.5,
+    13.28,
+    41.6,
+    2.3,
+    5.56,
+    7.66,
+    6.3
+   ],
+   [
+    2.98,
+    2.17,
+    3.52,
+    1.45,
+    0.9,
+    78.32,
+    2.71,
+    2.44,
+    5.51
+   ],
+   [
+    10.12,
+    6.59,
+    6.87,
+    8.13,
+    4.07,
+    5.33,
+    46.79,
+    2.8,
+    9.3
+   ],
+   [
+    3.97,
+    3.97,
+    4.88,
+    4.79,
+    4.43,
+    3.52,
+    3.07,
+    67.66,
+    3.7
+   ],
+   [
+    5.24,
+    1.81,
+    4.79,
+    6.14,
+    4.25,
+    4.97,
+    4.88,
+    2.62,
+    65.31
+   ]
+  ],
+  "totalPredictions": 10332
+ },
+ "perSubject": [
+  {
+   "subject": 0,
+   "accMean": 73.81,
+   "accSd": 8.99,
+   "accPerSeed": [
+    82.14,
+    75.0,
+    64.29
+   ],
+   "f1Mean": 73.8
+  },
+  {
+   "subject": 1,
+   "accMean": 72.62,
+   "accSd": 12.54,
+   "accPerSeed": [
+    60.71,
+    71.43,
+    85.71
+   ],
+   "f1Mean": 73.93
+  },
+  {
+   "subject": 2,
+   "accMean": 60.71,
+   "accSd": 6.19,
+   "accPerSeed": [
+    64.29,
+    64.29,
+    53.57
+   ],
+   "f1Mean": 60.19
+  },
+  {
+   "subject": 3,
+   "accMean": 38.1,
+   "accSd": 5.46,
+   "accPerSeed": [
+    42.86,
+    39.29,
+    32.14
+   ],
+   "f1Mean": 36.94
+  },
+  {
+   "subject": 4,
+   "accMean": 45.24,
+   "accSd": 2.06,
+   "accPerSeed": [
+    46.43,
+    46.43,
+    42.86
+   ],
+   "f1Mean": 44.65
+  },
+  {
+   "subject": 5,
+   "accMean": 75.0,
+   "accSd": 3.57,
+   "accPerSeed": [
+    71.43,
+    75.0,
+    78.57
+   ],
+   "f1Mean": 75.82
+  },
+  {
+   "subject": 6,
+   "accMean": 75.0,
+   "accSd": 3.57,
+   "accPerSeed": [
+    75.0,
+    78.57,
+    71.43
+   ],
+   "f1Mean": 75.06
+  },
+  {
+   "subject": 7,
+   "accMean": 40.48,
+   "accSd": 5.46,
+   "accPerSeed": [
+    39.29,
+    35.71,
+    46.43
+   ],
+   "f1Mean": 40.57
+  },
+  {
+   "subject": 8,
+   "accMean": 64.29,
+   "accSd": 3.57,
+   "accPerSeed": [
+    60.71,
+    64.29,
+    67.86
+   ],
+   "f1Mean": 63.62
+  },
+  {
+   "subject": 9,
+   "accMean": 57.14,
+   "accSd": 3.57,
+   "accPerSeed": [
+    60.71,
+    53.57,
+    57.14
+   ],
+   "f1Mean": 56.96
+  },
+  {
+   "subject": 10,
+   "accMean": 59.52,
+   "accSd": 4.12,
+   "accPerSeed": [
+    57.14,
+    57.14,
+    64.29
+   ],
+   "f1Mean": 59.93
+  },
+  {
+   "subject": 11,
+   "accMean": 67.86,
+   "accSd": 3.57,
+   "accPerSeed": [
+    64.29,
+    67.86,
+    71.43
+   ],
+   "f1Mean": 68.74
+  },
+  {
+   "subject": 12,
+   "accMean": 71.43,
+   "accSd": 6.19,
+   "accPerSeed": [
+    75.0,
+    75.0,
+    64.29
+   ],
+   "f1Mean": 71.67
+  },
+  {
+   "subject": 13,
+   "accMean": 85.71,
+   "accSd": 6.19,
+   "accPerSeed": [
+    82.14,
+    82.14,
+    92.86
+   ],
+   "f1Mean": 85.35
+  },
+  {
+   "subject": 14,
+   "accMean": 72.62,
+   "accSd": 2.06,
+   "accPerSeed": [
+    71.43,
+    71.43,
+    75.0
+   ],
+   "f1Mean": 72.2
+  },
+  {
+   "subject": 15,
+   "accMean": 69.05,
+   "accSd": 11.48,
+   "accPerSeed": [
+    64.29,
+    82.14,
+    60.71
+   ],
+   "f1Mean": 69.57
+  },
+  {
+   "subject": 16,
+   "accMean": 65.48,
+   "accSd": 10.31,
+   "accPerSeed": [
+    71.43,
+    53.57,
+    71.43
+   ],
+   "f1Mean": 66.09
+  },
+  {
+   "subject": 17,
+   "accMean": 57.14,
+   "accSd": 7.14,
+   "accPerSeed": [
+    50.0,
+    64.29,
+    57.14
+   ],
+   "f1Mean": 56.54
+  },
+  {
+   "subject": 18,
+   "accMean": 54.76,
+   "accSd": 10.31,
+   "accPerSeed": [
+    60.71,
+    42.86,
+    60.71
+   ],
+   "f1Mean": 52.71
+  },
+  {
+   "subject": 19,
+   "accMean": 69.05,
+   "accSd": 4.12,
+   "accPerSeed": [
+    71.43,
+    71.43,
+    64.29
+   ],
+   "f1Mean": 69.46
+  },
+  {
+   "subject": 20,
+   "accMean": 48.81,
+   "accSd": 4.12,
+   "accPerSeed": [
+    46.43,
+    46.43,
+    53.57
+   ],
+   "f1Mean": 48.72
+  },
+  {
+   "subject": 21,
+   "accMean": 77.38,
+   "accSd": 4.12,
+   "accPerSeed": [
+    75.0,
+    75.0,
+    82.14
+   ],
+   "f1Mean": 77.28
+  },
+  {
+   "subject": 22,
+   "accMean": 52.38,
+   "accSd": 2.06,
+   "accPerSeed": [
+    50.0,
+    53.57,
+    53.57
+   ],
+   "f1Mean": 51.03
+  },
+  {
+   "subject": 23,
+   "accMean": 14.29,
+   "accSd": 3.57,
+   "accPerSeed": [
+    14.29,
+    10.71,
+    17.86
+   ],
+   "f1Mean": 8.52
+  },
+  {
+   "subject": 24,
+   "accMean": 73.81,
+   "accSd": 4.12,
+   "accPerSeed": [
+    78.57,
+    71.43,
+    71.43
+   ],
+   "f1Mean": 72.91
+  },
+  {
+   "subject": 25,
+   "accMean": 65.48,
+   "accSd": 5.46,
+   "accPerSeed": [
+    60.71,
+    64.29,
+    71.43
+   ],
+   "f1Mean": 65.06
+  },
+  {
+   "subject": 26,
+   "accMean": 82.14,
+   "accSd": 9.45,
+   "accPerSeed": [
+    85.71,
+    71.43,
+    89.29
+   ],
+   "f1Mean": 81.71
+  },
+  {
+   "subject": 27,
+   "accMean": 78.57,
+   "accSd": 9.45,
+   "accPerSeed": [
+    89.29,
+    75.0,
+    71.43
+   ],
+   "f1Mean": 79.89
+  },
+  {
+   "subject": 28,
+   "accMean": 78.57,
+   "accSd": 9.45,
+   "accPerSeed": [
+    85.71,
+    67.86,
+    82.14
+   ],
+   "f1Mean": 78.57
+  },
+  {
+   "subject": 29,
+   "accMean": 52.38,
+   "accSd": 5.46,
+   "accPerSeed": [
+    57.14,
+    53.57,
+    46.43
+   ],
+   "f1Mean": 50.81
+  },
+  {
+   "subject": 30,
+   "accMean": 17.86,
+   "accSd": 3.57,
+   "accPerSeed": [
+    17.86,
+    14.29,
+    21.43
+   ],
+   "f1Mean": 16.85
+  },
+  {
+   "subject": 31,
+   "accMean": 76.19,
+   "accSd": 10.91,
+   "accPerSeed": [
+    78.57,
+    85.71,
+    64.29
+   ],
+   "f1Mean": 75.14
+  },
+  {
+   "subject": 32,
+   "accMean": 65.48,
+   "accSd": 5.46,
+   "accPerSeed": [
+    71.43,
+    60.71,
+    64.29
+   ],
+   "f1Mean": 63.69
+  },
+  {
+   "subject": 33,
+   "accMean": 70.24,
+   "accSd": 8.99,
+   "accPerSeed": [
+    60.71,
+    71.43,
+    78.57
+   ],
+   "f1Mean": 69.08
+  },
+  {
+   "subject": 34,
+   "accMean": 57.14,
+   "accSd": 3.57,
+   "accPerSeed": [
+    60.71,
+    53.57,
+    57.14
+   ],
+   "f1Mean": 57.2
+  },
+  {
+   "subject": 35,
+   "accMean": 60.71,
+   "accSd": 3.57,
+   "accPerSeed": [
+    64.29,
+    57.14,
+    60.71
+   ],
+   "f1Mean": 58.8
+  },
+  {
+   "subject": 36,
+   "accMean": 72.62,
+   "accSd": 8.99,
+   "accPerSeed": [
+    82.14,
+    71.43,
+    64.29
+   ],
+   "f1Mean": 72.68
+  },
+  {
+   "subject": 37,
+   "accMean": 76.19,
+   "accSd": 8.99,
+   "accPerSeed": [
+    67.86,
+    85.71,
+    75.0
+   ],
+   "f1Mean": 75.31
+  },
+  {
+   "subject": 38,
+   "accMean": 72.62,
+   "accSd": 5.46,
+   "accPerSeed": [
+    71.43,
+    78.57,
+    67.86
+   ],
+   "f1Mean": 72.2
+  },
+  {
+   "subject": 39,
+   "accMean": 72.62,
+   "accSd": 2.06,
+   "accPerSeed": [
+    75.0,
+    71.43,
+    71.43
+   ],
+   "f1Mean": 72.05
+  },
+  {
+   "subject": 40,
+   "accMean": 75.0,
+   "accSd": 3.57,
+   "accPerSeed": [
+    78.57,
+    75.0,
+    71.43
+   ],
+   "f1Mean": 75.34
+  },
+  {
+   "subject": 41,
+   "accMean": 67.86,
+   "accSd": 6.19,
+   "accPerSeed": [
+    64.29,
+    75.0,
+    64.29
+   ],
+   "f1Mean": 68.19
+  },
+  {
+   "subject": 42,
+   "accMean": 60.71,
+   "accSd": 6.19,
+   "accPerSeed": [
+    53.57,
+    64.29,
+    64.29
+   ],
+   "f1Mean": 60.16
+  },
+  {
+   "subject": 43,
+   "accMean": 86.9,
+   "accSd": 7.43,
+   "accPerSeed": [
+    89.29,
+    92.86,
+    78.57
+   ],
+   "f1Mean": 86.5
+  },
+  {
+   "subject": 44,
+   "accMean": 58.33,
+   "accSd": 7.43,
+   "accPerSeed": [
+    64.29,
+    60.71,
+    50.0
+   ],
+   "f1Mean": 57.78
+  },
+  {
+   "subject": 45,
+   "accMean": 86.9,
+   "accSd": 2.06,
+   "accPerSeed": [
+    85.71,
+    85.71,
+    89.29
+   ],
+   "f1Mean": 86.97
+  },
+  {
+   "subject": 46,
+   "accMean": 80.95,
+   "accSd": 5.46,
+   "accPerSeed": [
+    82.14,
+    75.0,
+    85.71
+   ],
+   "f1Mean": 80.54
+  },
+  {
+   "subject": 47,
+   "accMean": 64.29,
+   "accSd": 3.57,
+   "accPerSeed": [
+    60.71,
+    64.29,
+    67.86
+   ],
+   "f1Mean": 64.19
+  },
+  {
+   "subject": 48,
+   "accMean": 79.76,
+   "accSd": 2.06,
+   "accPerSeed": [
+    78.57,
+    78.57,
+    82.14
+   ],
+   "f1Mean": 79.59
+  },
+  {
+   "subject": 49,
+   "accMean": 64.29,
+   "accSd": 9.45,
+   "accPerSeed": [
+    53.57,
+    71.43,
+    67.86
+   ],
+   "f1Mean": 64.2
+  },
+  {
+   "subject": 50,
+   "accMean": 78.57,
+   "accSd": 7.14,
+   "accPerSeed": [
+    78.57,
+    85.71,
+    71.43
+   ],
+   "f1Mean": 78.35
+  },
+  {
+   "subject": 51,
+   "accMean": 59.52,
+   "accSd": 2.06,
+   "accPerSeed": [
+    60.71,
+    60.71,
+    57.14
+   ],
+   "f1Mean": 57.2
+  },
+  {
+   "subject": 52,
+   "accMean": 59.52,
+   "accSd": 5.46,
+   "accPerSeed": [
+    53.57,
+    60.71,
+    64.29
+   ],
+   "f1Mean": 58.1
+  },
+  {
+   "subject": 53,
+   "accMean": 69.05,
+   "accSd": 5.46,
+   "accPerSeed": [
+    64.29,
+    75.0,
+    67.86
+   ],
+   "f1Mean": 67.2
+  },
+  {
+   "subject": 54,
+   "accMean": 72.62,
+   "accSd": 10.91,
+   "accPerSeed": [
+    82.14,
+    75.0,
+    60.71
+   ],
+   "f1Mean": 71.0
+  },
+  {
+   "subject": 55,
+   "accMean": 60.71,
+   "accSd": 7.14,
+   "accPerSeed": [
+    53.57,
+    67.86,
+    60.71
+   ],
+   "f1Mean": 60.57
+  },
+  {
+   "subject": 56,
+   "accMean": 47.62,
+   "accSd": 2.06,
+   "accPerSeed": [
+    46.43,
+    46.43,
+    50.0
+   ],
+   "f1Mean": 47.3
+  },
+  {
+   "subject": 57,
+   "accMean": 66.67,
+   "accSd": 2.06,
+   "accPerSeed": [
+    64.29,
+    67.86,
+    67.86
+   ],
+   "f1Mean": 66.65
+  },
+  {
+   "subject": 58,
+   "accMean": 53.57,
+   "accSd": 3.57,
+   "accPerSeed": [
+    53.57,
+    57.14,
+    50.0
+   ],
+   "f1Mean": 52.34
+  },
+  {
+   "subject": 59,
+   "accMean": 52.38,
+   "accSd": 7.43,
+   "accPerSeed": [
+    60.71,
+    50.0,
+    46.43
+   ],
+   "f1Mean": 51.29
+  },
+  {
+   "subject": 60,
+   "accMean": 69.05,
+   "accSd": 7.43,
+   "accPerSeed": [
+    60.71,
+    71.43,
+    75.0
+   ],
+   "f1Mean": 67.95
+  },
+  {
+   "subject": 61,
+   "accMean": 48.81,
+   "accSd": 5.46,
+   "accPerSeed": [
+    50.0,
+    53.57,
+    42.86
+   ],
+   "f1Mean": 48.91
+  },
+  {
+   "subject": 62,
+   "accMean": 65.48,
+   "accSd": 8.99,
+   "accPerSeed": [
+    75.0,
+    57.14,
+    64.29
+   ],
+   "f1Mean": 65.67
+  },
+  {
+   "subject": 63,
+   "accMean": 71.43,
+   "accSd": 3.57,
+   "accPerSeed": [
+    75.0,
+    71.43,
+    67.86
+   ],
+   "f1Mean": 72.31
+  },
+  {
+   "subject": 64,
+   "accMean": 35.71,
+   "accSd": 9.45,
+   "accPerSeed": [
+    42.86,
+    39.29,
+    25.0
+   ],
+   "f1Mean": 32.66
+  },
+  {
+   "subject": 65,
+   "accMean": 55.95,
+   "accSd": 5.46,
+   "accPerSeed": [
+    60.71,
+    57.14,
+    50.0
+   ],
+   "f1Mean": 55.12
+  },
+  {
+   "subject": 66,
+   "accMean": 70.24,
+   "accSd": 8.25,
+   "accPerSeed": [
+    75.0,
+    60.71,
+    75.0
+   ],
+   "f1Mean": 69.81
+  },
+  {
+   "subject": 67,
+   "accMean": 26.19,
+   "accSd": 5.46,
+   "accPerSeed": [
+    25.0,
+    21.43,
+    32.14
+   ],
+   "f1Mean": 27.76
+  },
+  {
+   "subject": 68,
+   "accMean": 54.76,
+   "accSd": 11.48,
+   "accPerSeed": [
+    50.0,
+    67.86,
+    46.43
+   ],
+   "f1Mean": 53.84
+  },
+  {
+   "subject": 69,
+   "accMean": 46.43,
+   "accSd": 6.19,
+   "accPerSeed": [
+    50.0,
+    39.29,
+    50.0
+   ],
+   "f1Mean": 43.66
+  },
+  {
+   "subject": 70,
+   "accMean": 51.19,
+   "accSd": 2.06,
+   "accPerSeed": [
+    53.57,
+    50.0,
+    50.0
+   ],
+   "f1Mean": 51.07
+  },
+  {
+   "subject": 71,
+   "accMean": 48.81,
+   "accSd": 2.06,
+   "accPerSeed": [
+    46.43,
+    50.0,
+    50.0
+   ],
+   "f1Mean": 46.83
+  },
+  {
+   "subject": 72,
+   "accMean": 35.71,
+   "accSd": 6.19,
+   "accPerSeed": [
+    28.57,
+    39.29,
+    39.29
+   ],
+   "f1Mean": 35.04
+  },
+  {
+   "subject": 73,
+   "accMean": 41.67,
+   "accSd": 2.06,
+   "accPerSeed": [
+    39.29,
+    42.86,
+    42.86
+   ],
+   "f1Mean": 40.88
+  },
+  {
+   "subject": 74,
+   "accMean": 45.24,
+   "accSd": 12.54,
+   "accPerSeed": [
+    57.14,
+    32.14,
+    46.43
+   ],
+   "f1Mean": 43.07
+  },
+  {
+   "subject": 75,
+   "accMean": 42.86,
+   "accSd": 3.57,
+   "accPerSeed": [
+    39.29,
+    42.86,
+    46.43
+   ],
+   "f1Mean": 43.49
+  },
+  {
+   "subject": 76,
+   "accMean": 60.71,
+   "accSd": 7.14,
+   "accPerSeed": [
+    53.57,
+    67.86,
+    60.71
+   ],
+   "f1Mean": 60.87
+  },
+  {
+   "subject": 77,
+   "accMean": 63.1,
+   "accSd": 2.06,
+   "accPerSeed": [
+    64.29,
+    64.29,
+    60.71
+   ],
+   "f1Mean": 62.12
+  },
+  {
+   "subject": 78,
+   "accMean": 59.52,
+   "accSd": 2.06,
+   "accPerSeed": [
+    60.71,
+    57.14,
+    60.71
+   ],
+   "f1Mean": 58.67
+  },
+  {
+   "subject": 79,
+   "accMean": 77.38,
+   "accSd": 5.46,
+   "accPerSeed": [
+    71.43,
+    82.14,
+    78.57
+   ],
+   "f1Mean": 77.4
+  },
+  {
+   "subject": 80,
+   "accMean": 47.62,
+   "accSd": 7.43,
+   "accPerSeed": [
+    53.57,
+    39.29,
+    50.0
+   ],
+   "f1Mean": 46.31
+  },
+  {
+   "subject": 81,
+   "accMean": 69.05,
+   "accSd": 16.1,
+   "accPerSeed": [
+    53.57,
+    85.71,
+    67.86
+   ],
+   "f1Mean": 68.75
+  },
+  {
+   "subject": 82,
+   "accMean": 63.1,
+   "accSd": 8.25,
+   "accPerSeed": [
+    67.86,
+    53.57,
+    67.86
+   ],
+   "f1Mean": 62.78
+  },
+  {
+   "subject": 83,
+   "accMean": 65.48,
+   "accSd": 5.46,
+   "accPerSeed": [
+    71.43,
+    64.29,
+    60.71
+   ],
+   "f1Mean": 65.4
+  },
+  {
+   "subject": 84,
+   "accMean": 65.48,
+   "accSd": 5.46,
+   "accPerSeed": [
+    71.43,
+    64.29,
+    60.71
+   ],
+   "f1Mean": 64.97
+  },
+  {
+   "subject": 85,
+   "accMean": 48.81,
+   "accSd": 5.46,
+   "accPerSeed": [
+    42.86,
+    50.0,
+    53.57
+   ],
+   "f1Mean": 50.03
+  },
+  {
+   "subject": 86,
+   "accMean": 13.1,
+   "accSd": 4.12,
+   "accPerSeed": [
+    17.86,
+    10.71,
+    10.71
+   ],
+   "f1Mean": 12.75
+  },
+  {
+   "subject": 87,
+   "accMean": 38.1,
+   "accSd": 2.06,
+   "accPerSeed": [
+    35.71,
+    39.29,
+    39.29
+   ],
+   "f1Mean": 36.49
+  },
+  {
+   "subject": 88,
+   "accMean": 25.0,
+   "accSd": 6.19,
+   "accPerSeed": [
+    32.14,
+    21.43,
+    21.43
+   ],
+   "f1Mean": 22.83
+  },
+  {
+   "subject": 89,
+   "accMean": 52.38,
+   "accSd": 2.06,
+   "accPerSeed": [
+    50.0,
+    53.57,
+    53.57
+   ],
+   "f1Mean": 53.94
+  },
+  {
+   "subject": 90,
+   "accMean": 42.86,
+   "accSd": 6.19,
+   "accPerSeed": [
+    46.43,
+    46.43,
+    35.71
+   ],
+   "f1Mean": 41.2
+  },
+  {
+   "subject": 91,
+   "accMean": 26.19,
+   "accSd": 5.46,
+   "accPerSeed": [
+    21.43,
+    32.14,
+    25.0
+   ],
+   "f1Mean": 25.48
+  },
+  {
+   "subject": 92,
+   "accMean": 69.05,
+   "accSd": 7.43,
+   "accPerSeed": [
+    75.0,
+    71.43,
+    60.71
+   ],
+   "f1Mean": 69.62
+  },
+  {
+   "subject": 93,
+   "accMean": 61.9,
+   "accSd": 2.06,
+   "accPerSeed": [
+    60.71,
+    64.29,
+    60.71
+   ],
+   "f1Mean": 61.9
+  },
+  {
+   "subject": 94,
+   "accMean": 83.33,
+   "accSd": 2.06,
+   "accPerSeed": [
+    85.71,
+    82.14,
+    82.14
+   ],
+   "f1Mean": 82.21
+  },
+  {
+   "subject": 95,
+   "accMean": 73.81,
+   "accSd": 4.12,
+   "accPerSeed": [
+    71.43,
+    78.57,
+    71.43
+   ],
+   "f1Mean": 73.19
+  },
+  {
+   "subject": 96,
+   "accMean": 50.0,
+   "accSd": 9.45,
+   "accPerSeed": [
+    60.71,
+    42.86,
+    46.43
+   ],
+   "f1Mean": 46.85
+  },
+  {
+   "subject": 97,
+   "accMean": 33.33,
+   "accSd": 2.06,
+   "accPerSeed": [
+    32.14,
+    35.71,
+    32.14
+   ],
+   "f1Mean": 32.14
+  },
+  {
+   "subject": 98,
+   "accMean": 54.76,
+   "accSd": 4.12,
+   "accPerSeed": [
+    57.14,
+    57.14,
+    50.0
+   ],
+   "f1Mean": 55.15
+  },
+  {
+   "subject": 99,
+   "accMean": 47.62,
+   "accSd": 5.46,
+   "accPerSeed": [
+    46.43,
+    42.86,
+    53.57
+   ],
+   "f1Mean": 46.3
+  },
+  {
+   "subject": 100,
+   "accMean": 44.05,
+   "accSd": 4.12,
+   "accPerSeed": [
+    46.43,
+    46.43,
+    39.29
+   ],
+   "f1Mean": 43.68
+  },
+  {
+   "subject": 101,
+   "accMean": 17.86,
+   "accSd": 0.0,
+   "accPerSeed": [
+    17.86,
+    17.86,
+    17.86
+   ],
+   "f1Mean": 16.81
+  },
+  {
+   "subject": 102,
+   "accMean": 55.95,
+   "accSd": 10.31,
+   "accPerSeed": [
+    50.0,
+    50.0,
+    67.86
+   ],
+   "f1Mean": 55.16
+  },
+  {
+   "subject": 103,
+   "accMean": 50.0,
+   "accSd": 3.57,
+   "accPerSeed": [
+    50.0,
+    53.57,
+    46.43
+   ],
+   "f1Mean": 50.41
+  },
+  {
+   "subject": 104,
+   "accMean": 33.33,
+   "accSd": 7.43,
+   "accPerSeed": [
+    39.29,
+    25.0,
+    35.71
+   ],
+   "f1Mean": 32.57
+  },
+  {
+   "subject": 105,
+   "accMean": 67.86,
+   "accSd": 7.14,
+   "accPerSeed": [
+    60.71,
+    75.0,
+    67.86
+   ],
+   "f1Mean": 68.5
+  },
+  {
+   "subject": 106,
+   "accMean": 39.29,
+   "accSd": 6.19,
+   "accPerSeed": [
+    42.86,
+    42.86,
+    32.14
+   ],
+   "f1Mean": 38.98
+  },
+  {
+   "subject": 107,
+   "accMean": 59.52,
+   "accSd": 7.43,
+   "accPerSeed": [
+    67.86,
+    57.14,
+    53.57
+   ],
+   "f1Mean": 57.85
+  },
+  {
+   "subject": 108,
+   "accMean": 35.71,
+   "accSd": 14.29,
+   "accPerSeed": [
+    50.0,
+    35.71,
+    21.43
+   ],
+   "f1Mean": 35.66
+  },
+  {
+   "subject": 109,
+   "accMean": 66.67,
+   "accSd": 4.12,
+   "accPerSeed": [
+    71.43,
+    64.29,
+    64.29
+   ],
+   "f1Mean": 65.64
+  },
+  {
+   "subject": 110,
+   "accMean": 51.19,
+   "accSd": 4.12,
+   "accPerSeed": [
+    53.57,
+    46.43,
+    53.57
+   ],
+   "f1Mean": 49.79
+  },
+  {
+   "subject": 111,
+   "accMean": 38.1,
+   "accSd": 8.25,
+   "accPerSeed": [
+    42.86,
+    42.86,
+    28.57
+   ],
+   "f1Mean": 36.71
+  },
+  {
+   "subject": 112,
+   "accMean": 65.48,
+   "accSd": 7.43,
+   "accPerSeed": [
+    71.43,
+    67.86,
+    57.14
+   ],
+   "f1Mean": 64.2
+  },
+  {
+   "subject": 113,
+   "accMean": 61.9,
+   "accSd": 5.46,
+   "accPerSeed": [
+    57.14,
+    67.86,
+    60.71
+   ],
+   "f1Mean": 61.19
+  },
+  {
+   "subject": 114,
+   "accMean": 52.38,
+   "accSd": 14.43,
+   "accPerSeed": [
+    39.29,
+    50.0,
+    67.86
+   ],
+   "f1Mean": 53.12
+  },
+  {
+   "subject": 115,
+   "accMean": 54.76,
+   "accSd": 5.46,
+   "accPerSeed": [
+    53.57,
+    50.0,
+    60.71
+   ],
+   "f1Mean": 55.06
+  },
+  {
+   "subject": 116,
+   "accMean": 71.43,
+   "accSd": 3.57,
+   "accPerSeed": [
+    67.86,
+    75.0,
+    71.43
+   ],
+   "f1Mean": 70.38
+  },
+  {
+   "subject": 117,
+   "accMean": 39.29,
+   "accSd": 7.14,
+   "accPerSeed": [
+    32.14,
+    46.43,
+    39.29
+   ],
+   "f1Mean": 38.65
+  },
+  {
+   "subject": 118,
+   "accMean": 27.38,
+   "accSd": 7.43,
+   "accPerSeed": [
+    35.71,
+    25.0,
+    21.43
+   ],
+   "f1Mean": 26.46
+  },
+  {
+   "subject": 119,
+   "accMean": 58.33,
+   "accSd": 5.46,
+   "accPerSeed": [
+    53.57,
+    64.29,
+    57.14
+   ],
+   "f1Mean": 57.28
+  },
+  {
+   "subject": 120,
+   "accMean": 55.95,
+   "accSd": 5.46,
+   "accPerSeed": [
+    50.0,
+    57.14,
+    60.71
+   ],
+   "f1Mean": 55.54
+  },
+  {
+   "subject": 121,
+   "accMean": 46.43,
+   "accSd": 9.45,
+   "accPerSeed": [
+    42.86,
+    57.14,
+    39.29
+   ],
+   "f1Mean": 45.0
+  },
+  {
+   "subject": 122,
+   "accMean": 58.33,
+   "accSd": 2.06,
+   "accPerSeed": [
+    57.14,
+    60.71,
+    57.14
+   ],
+   "f1Mean": 58.38
+  }
+ ],
+ "perSubjectSummary": {
+  "hardInAllSeeds": [
+   23,
+   30,
+   86,
+   101
+  ],
+  "meanSeedNoiseSd": 5.89,
+  "medianSeedNoiseSd": 5.46,
+  "maxSeedNoiseSd": 16.1,
+  "cohort0to60": 64.83,
+  "cohort61to122": 51.34
+ },
+ "ablation": [
+  {
+   "run": "nb15",
+   "change": "CNN-DANN, lambda 0.05 (base)",
+   "accuracy": 47.91,
+   "macroF1": 46.02,
+   "balancedAccuracy": 48.93,
+   "valMacroF1": null,
+   "verdict": "Base"
+  },
+  {
+   "run": "nb18",
+   "change": "Transformer block added",
+   "accuracy": 53.28,
+   "macroF1": 52.14,
+   "balancedAccuracy": 53.99,
+   "valMacroF1": 50.58,
+   "verdict": "Gain (+5.37 pp)"
+  },
+  {
+   "run": "19_4",
+   "change": "DANN lambda 0.05 to 0.10",
+   "accuracy": 52.0,
+   "macroF1": 51.29,
+   "balancedAccuracy": 52.82,
+   "valMacroF1": 50.16,
+   "verdict": "No gain"
+  },
+  {
+   "run": "19_5",
+   "change": "Attention pooling only",
+   "accuracy": 52.82,
+   "macroF1": 51.63,
+   "balancedAccuracy": 53.58,
+   "valMacroF1": 50.87,
+   "verdict": "No gain"
+  },
+  {
+   "run": "19_6",
+   "change": "Focal loss plus attention pooling",
+   "accuracy": 51.92,
+   "macroF1": 50.96,
+   "balancedAccuracy": 52.74,
+   "valMacroF1": 49.51,
+   "verdict": "No gain"
+  },
+  {
+   "run": "nb20",
+   "change": "Center loss added",
+   "accuracy": 54.99,
+   "macroF1": 54.01,
+   "balancedAccuracy": 55.65,
+   "valMacroF1": 51.91,
+   "verdict": "Gain, paired p = 0.037"
+  },
+  {
+   "run": "nb21",
+   "change": "Emotion SupCon added to nb20",
+   "accuracy": 55.4,
+   "macroF1": 54.68,
+   "balancedAccuracy": 56.14,
+   "valMacroF1": 51.55,
+   "verdict": "No gain"
+  },
+  {
+   "run": "nb22",
+   "change": "Per subject standardisation",
+   "accuracy": 58.36,
+   "macroF1": 57.74,
+   "balancedAccuracy": 58.94,
+   "valMacroF1": 58.51,
+   "verdict": "Gain, paired p = 0.0013. Best supported model"
+  },
+  {
+   "run": "nb24",
+   "change": "Stimulus contrastive added to nb22",
+   "accuracy": 59.35,
+   "macroF1": 58.52,
+   "balancedAccuracy": 59.83,
+   "valMacroF1": 58.93,
+   "verdict": "Highest single seed, paired p = 0.19, not a supported gain"
+  }
+ ],
+ "pairedTests": [
+  {
+   "comparison": "nb22 vs nb20 (per subject standardisation step)",
+   "result": "Gain supported",
+   "detail": "Paired p = 0.0013 across the same 123 subjects."
+  },
+  {
+   "comparison": "nb24 vs nb22 (stimulus contrastive)",
+   "result": "Not significant, not claimed",
+   "detail": "Accuracy +0.99 pp, paired t p = 0.19, Wilcoxon p = 0.10, sign p = 0.23, 95% CI -0.51 to +2.48. Macro F1 +0.78 pp, p = 0.32."
+  },
+  {
+   "comparison": "nb20 vs previous (center loss)",
+   "result": "Gain supported",
+   "detail": "Paired p = 0.037."
+  }
+ ],
+ "analyses": {
+  "ensembleAccuracy": 61.0,
+  "ensembleNote": "Hard majority vote of the three seed models, computed from the three all_predictions files after row alignment was asserted. Rule: per trial, the class with the most votes wins; when all three seeds predict different classes (435 trials), the smallest class index wins, the bincount argmax rule from her original analysis, which reproduces 61.00% (2101 of 3444) exactly. The older wording 'three voters, so no ties' is not strictly correct for 9 classes and should be corrected in the thesis. An analysis of saved outputs, or the final system only if described exactly this way.",
+  "valenceAccuracySeed42": 71.25,
+  "valenceWithinErrorPct": 31.0
+ },
+ "demoSubjects": {
+  "strong": {
+   "subject": 45,
+   "accMean": 86.9,
+   "trials": [
+    {
+     "video": 1,
+     "true": "Anger",
+     "predSeed42": "Anger",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 2,
+     "true": "Anger",
+     "predSeed42": "Anger",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 3,
+     "true": "Anger",
+     "predSeed42": "Anger",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 4,
+     "true": "Disgust",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 5,
+     "true": "Disgust",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 6,
+     "true": "Disgust",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 7,
+     "true": "Fear",
+     "predSeed42": "Fear",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 8,
+     "true": "Fear",
+     "predSeed42": "Fear",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 9,
+     "true": "Fear",
+     "predSeed42": "Fear",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 10,
+     "true": "Sadness",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Sadness",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 11,
+     "true": "Sadness",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Sadness",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 12,
+     "true": "Sadness",
+     "predSeed42": "Anger",
+     "predEnsemble": "Sadness",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 13,
+     "true": "Neutral",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 14,
+     "true": "Neutral",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 15,
+     "true": "Neutral",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 16,
+     "true": "Neutral",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 17,
+     "true": "Amusement",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Amusement",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 18,
+     "true": "Amusement",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Amusement",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 19,
+     "true": "Amusement",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Amusement",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 20,
+     "true": "Inspiration",
+     "predSeed42": "Inspiration",
+     "predEnsemble": "Inspiration",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 21,
+     "true": "Inspiration",
+     "predSeed42": "Inspiration",
+     "predEnsemble": "Inspiration",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 22,
+     "true": "Inspiration",
+     "predSeed42": "Inspiration",
+     "predEnsemble": "Inspiration",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 23,
+     "true": "Joy",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 1,
+     "correct": false
+    },
+    {
+     "video": 24,
+     "true": "Joy",
+     "predSeed42": "Joy",
+     "predEnsemble": "Joy",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 25,
+     "true": "Joy",
+     "predSeed42": "Joy",
+     "predEnsemble": "Joy",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 26,
+     "true": "Tenderness",
+     "predSeed42": "Joy",
+     "predEnsemble": "Joy",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 27,
+     "true": "Tenderness",
+     "predSeed42": "Tenderness",
+     "predEnsemble": "Tenderness",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 28,
+     "true": "Tenderness",
+     "predSeed42": "Tenderness",
+     "predEnsemble": "Tenderness",
+     "ensembleVotes": 3,
+     "correct": true
+    }
+   ]
+  },
+  "median": {
+   "subject": 107,
+   "accMean": 59.52,
+   "trials": [
+    {
+     "video": 1,
+     "true": "Anger",
+     "predSeed42": "Anger",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 2,
+     "true": "Anger",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 3,
+     "true": "Anger",
+     "predSeed42": "Anger",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 4,
+     "true": "Disgust",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 1,
+     "correct": true
+    },
+    {
+     "video": 5,
+     "true": "Disgust",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 1,
+     "correct": true
+    },
+    {
+     "video": 6,
+     "true": "Disgust",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 7,
+     "true": "Fear",
+     "predSeed42": "Fear",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 8,
+     "true": "Fear",
+     "predSeed42": "Fear",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 9,
+     "true": "Fear",
+     "predSeed42": "Fear",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 10,
+     "true": "Sadness",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Sadness",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 11,
+     "true": "Sadness",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 12,
+     "true": "Sadness",
+     "predSeed42": "Joy",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 1,
+     "correct": false
+    },
+    {
+     "video": 13,
+     "true": "Neutral",
+     "predSeed42": "Inspiration",
+     "predEnsemble": "Inspiration",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 14,
+     "true": "Neutral",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 3,
+     "correct": false
+    },
+    {
+     "video": 15,
+     "true": "Neutral",
+     "predSeed42": "Anger",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 16,
+     "true": "Neutral",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Sadness",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 17,
+     "true": "Amusement",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Amusement",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 18,
+     "true": "Amusement",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Amusement",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 19,
+     "true": "Amusement",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Amusement",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 20,
+     "true": "Inspiration",
+     "predSeed42": "Inspiration",
+     "predEnsemble": "Inspiration",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 21,
+     "true": "Inspiration",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Sadness",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 22,
+     "true": "Inspiration",
+     "predSeed42": "Joy",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 23,
+     "true": "Joy",
+     "predSeed42": "Joy",
+     "predEnsemble": "Joy",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 24,
+     "true": "Joy",
+     "predSeed42": "Joy",
+     "predEnsemble": "Joy",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 25,
+     "true": "Joy",
+     "predSeed42": "Joy",
+     "predEnsemble": "Joy",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 26,
+     "true": "Tenderness",
+     "predSeed42": "Tenderness",
+     "predEnsemble": "Tenderness",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 27,
+     "true": "Tenderness",
+     "predSeed42": "Tenderness",
+     "predEnsemble": "Tenderness",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 28,
+     "true": "Tenderness",
+     "predSeed42": "Tenderness",
+     "predEnsemble": "Tenderness",
+     "ensembleVotes": 2,
+     "correct": true
+    }
+   ]
+  },
+  "hard": {
+   "subject": 86,
+   "accMean": 13.1,
+   "trials": [
+    {
+     "video": 1,
+     "true": "Anger",
+     "predSeed42": "Joy",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 1,
+     "correct": false
+    },
+    {
+     "video": 2,
+     "true": "Anger",
+     "predSeed42": "Tenderness",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 1,
+     "correct": false
+    },
+    {
+     "video": 3,
+     "true": "Anger",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 1,
+     "correct": false
+    },
+    {
+     "video": 4,
+     "true": "Disgust",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 3,
+     "correct": false
+    },
+    {
+     "video": 5,
+     "true": "Disgust",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 6,
+     "true": "Disgust",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 3,
+     "correct": false
+    },
+    {
+     "video": 7,
+     "true": "Fear",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Sadness",
+     "ensembleVotes": 3,
+     "correct": false
+    },
+    {
+     "video": 8,
+     "true": "Fear",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Tenderness",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 9,
+     "true": "Fear",
+     "predSeed42": "Joy",
+     "predEnsemble": "Joy",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 10,
+     "true": "Sadness",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Joy",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 11,
+     "true": "Sadness",
+     "predSeed42": "Fear",
+     "predEnsemble": "Amusement",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 12,
+     "true": "Sadness",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 13,
+     "true": "Neutral",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Sadness",
+     "ensembleVotes": 1,
+     "correct": false
+    },
+    {
+     "video": 14,
+     "true": "Neutral",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 1,
+     "correct": false
+    },
+    {
+     "video": 15,
+     "true": "Neutral",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Tenderness",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 16,
+     "true": "Neutral",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 1,
+     "correct": false
+    },
+    {
+     "video": 17,
+     "true": "Amusement",
+     "predSeed42": "Fear",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 18,
+     "true": "Amusement",
+     "predSeed42": "Amusement",
+     "predEnsemble": "Amusement",
+     "ensembleVotes": 3,
+     "correct": true
+    },
+    {
+     "video": 19,
+     "true": "Amusement",
+     "predSeed42": "Fear",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 20,
+     "true": "Inspiration",
+     "predSeed42": "Neutral",
+     "predEnsemble": "Neutral",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 21,
+     "true": "Inspiration",
+     "predSeed42": "Anger",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 22,
+     "true": "Inspiration",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Anger",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 23,
+     "true": "Joy",
+     "predSeed42": "Sadness",
+     "predEnsemble": "Sadness",
+     "ensembleVotes": 2,
+     "correct": false
+    },
+    {
+     "video": 24,
+     "true": "Joy",
+     "predSeed42": "Fear",
+     "predEnsemble": "Fear",
+     "ensembleVotes": 1,
+     "correct": false
+    },
+    {
+     "video": 25,
+     "true": "Joy",
+     "predSeed42": "Joy",
+     "predEnsemble": "Joy",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 26,
+     "true": "Tenderness",
+     "predSeed42": "Disgust",
+     "predEnsemble": "Disgust",
+     "ensembleVotes": 3,
+     "correct": false
+    },
+    {
+     "video": 27,
+     "true": "Tenderness",
+     "predSeed42": "Tenderness",
+     "predEnsemble": "Tenderness",
+     "ensembleVotes": 2,
+     "correct": true
+    },
+    {
+     "video": 28,
+     "true": "Tenderness",
+     "predSeed42": "Inspiration",
+     "predEnsemble": "Inspiration",
+     "ensembleVotes": 2,
+     "correct": false
+    }
+   ]
+  }
+ },
+ "limitations": [
+  "The SOTA reference, CSCL at 65.98% on FACED, was not beaten. That figure used a different protocol and raw EEG input, stated beside it wherever it is mentioned.",
+  "Predicted probabilities were not saved for these runs, so v1 shows true and predicted labels only. Probability bars belong to the v2 live inference model and must be labelled with that model's seed.",
+  "DE feature values (faced_de_trials.npz) are not in this repo, they live on Kaggle/Drive, so the 32 by 5 DE heatmap per trial is a v1.1 step that needs that file exported for the demo subjects.",
+  "Per subject validation F1 does not correlate across seeds by construction, because the validation split is seed dependent. Only the mean validation F1 is compared.",
+  "Research and education tool only. Not a medical device, not a diagnosis tool."
+ ]
+}

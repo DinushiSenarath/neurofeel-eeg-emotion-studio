@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b1220;
+  --panel: #111a2e;
+  --panel2: #16223c;
+  --ink: #e8eefc;
+  --muted: #9db0d6;
+  --accent: #5eead4;
+  --accent2: #93c5fd;
+  --warn: #fca5a5;
+  --good: #86efac;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: ui-sans-system, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.panel { background: var(--panel); border: 1px solid #22345c; border-radius: 16px; }
+.bar-track { background: #1e2c4d; border-radius: 999px; overflow: hidden; }
+.bar-fill { background: linear-gradient(90deg, var(--accent2), var(--accent)); height: 100%; border-radius: 999px; }
+.chip { border: 1px solid #2b4474; border-radius: 999px; padding: 2px 10px; font-size: 12px; color: var(--muted); }
+table.data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.data-table th, table.data-table td { padding: 8px 10px; border-bottom: 1px solid #22345c; text-align: right; }
+table.data-table th:first-child, table.data-table td:first-child { text-align: left; }
+table.data-table th { color: var(--muted); font-weight: 600; }
