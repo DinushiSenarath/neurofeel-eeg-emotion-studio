@@ -1,10 +1,15 @@
 import raw from "@/data/evaluation.json";
+import deRaw from "@/data/de_demo_subjects.json";
 
 export type Headline = { metric: string; mean: number; sd: number; perSeed: number[]; explanation: string };
 export type PerClass = { class: string; accuracyMean: number; accuracySd: number; precision: number; recall: number; f1: number; supportPerSeed: number; note: string };
 export type PerSubject = { subject: number; accMean: number; accSd: number; accPerSeed: number[]; f1Mean: number };
 export type Trial = { video: number; true: string; predSeed42: string; predEnsemble: string; ensembleVotes: number; correct: boolean };
 export type DemoSubject = { subject: number; accMean: number; trials: Trial[] };
+export type DeTrial = { video: number; true: string; deMeanOverSegments: number[][] };
+export type DeDemo = { bands: string[]; channels: number[]; subjects: Record<string, DeTrial[]> };
+
+export const deDemo = deRaw as unknown as DeDemo;
 
 export const data = raw as unknown as {
   meta: Record<string, string>;

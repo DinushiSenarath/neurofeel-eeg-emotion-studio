@@ -234,7 +234,7 @@ export default function Home() {
 
       <footer className="text-center text-xs pb-6" style={{ color: "var(--muted)" }}>
         NeuroFeel is a research and education tool. It is not a medical device and it does not diagnose any person.
-        FACED data is distributed through Synapse under its own terms; this site shows aggregated results and saved prediction labels only, no FACED feature files.
+        FACED data is distributed through Synapse under its own terms; besides aggregated results and saved prediction labels, the demo explorer shows mean DE values for the 3 demo subjects only, taken from the released FACED DE features.
       </footer>
     </main>
   );

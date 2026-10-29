@@ -17,7 +17,7 @@ A web platform that makes a DE feature based EEG emotion recognition model usabl
 
 The model input is Differential Entropy features released by FACED. The FACED authors recorded the EEG, filtered and downsampled it, and extracted the DE features. Dinushi's work was building the trial dataset from those features, per subject standardisation, model training and the full evaluation. No raw EEG processing is claimed anywhere in this project.
 
-Predicted probabilities were not saved for the three seed runs, so v1 shows true and predicted labels only. The 32 by 5 DE heatmap per trial needs faced_de_trials.npz exported for the demo subjects; that file lives on Kaggle and Drive, not in this repo, and is the v1.1 step.
+Predicted probabilities were not saved for the three seed runs, so predictions show true and predicted labels only. The demo explorer also shows a 32 by 5 DE heatmap per trial: each cell is the mean DE value over the trial's 30 segments, from `data/de_demo_subjects.json`, exported from faced_de_trials.npz for the 3 demo subjects only (subjects 45, 107, 86) with `scripts/export_de_demo.py`.
 
 ## Tech stack
 
@@ -40,4 +40,4 @@ The exporter checks every headline figure against the thesis final results table
 
 ## Research use only
 
-NeuroFeel is a research and education tool. It is not a medical device and it does not diagnose any person. FACED data is distributed through Synapse under its own terms. This repo contains aggregated results and saved prediction labels only, no FACED feature files.
+NeuroFeel is a research and education tool. It is not a medical device and it does not diagnose any person. FACED data is distributed through Synapse under its own terms. Besides aggregated results and saved prediction labels, this repo contains mean DE values for the 3 demo subjects only, in `data/de_demo_subjects.json`.
